@@ -1,41 +1,426 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  		<title>CaioDev</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<html lang="es">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/fontAwesome.css">
-        <link rel="stylesheet" href="css/light-box.css">
-        <link rel="stylesheet" href="css/templatemo-style.css">
-
-        <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Museo de Nosotros</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Text:ital@0;1&display=swap"
+        rel="stylesheet">
+</head>
 
 <body>
-
-  
-    <div id="video-container">
-        <div class="video-overlay"></div>
-        <div class="video-content">
-            <div class="inner">
-              <h1>Hi i'm <em>Caio</em></h1>
-              <p>I'm a software developer</p>
-              <p>specialized on Kotlin language</p>
-            </div>
+    <!-- Pantalla Terminal de Bienvenida -->
+    <section id="terminal">
+        <div class="terminal-contenido">
+            <div id="texto-terminal"></div>
         </div>
-        <video autoplay="" loop="" muted>
-        	<source src="code.mp4" type="video/mp4" />
-        </video>
+        <div class="scroll-indicador" id="scrollIndicador" onclick="scrollAlMuseo()">
+            <p>Desliza para entrar</p>
+            <div class="flecha-abajo">↓</div>
+        </div>
+    </section>
+
+    <!-- Luz que sigue al cursor -->
+    <div id="luz"></div>
+
+    <!-- Museo -->
+    <!-- Museo -->
+    <main id="museum">
+        <section class="sala activa" data-sala="2">
+            <h1 class="titulo-sala">The Beginning </br>(Antiguo testamento)
+            </h1>
+
+            <div class="galeria">
+                <!-- Marco 1 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/Primera Cita.jpg" alt="Primera Cita">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Nuestra Primera Cita</h3>
+                                <p>Nuestra primera cita registrada, me acuerdo muy bien de ese día,
+                                    de cómo me sentía nervioso antes de verte, de la
+                                    innegable conexión que teniamos que hacia que en mi estómago
+                                    brotaran todas las mariposas del mundo.
+                                </p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Nuestra primera cita</figcaption>
+                </figure>
+
+                <!-- Marco 2 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/Primeras Flores.jpg" alt="Primeras Flores">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Las Primeras Flores</h3>
+                                <p>El primer ramo que te regalé, elegido con cuidado y nervios ya que era la primera vez
+                                    que regalaba uno.
+                                    Esas flores representaban un mi amor por ti, el querer empezar algo bonito juntos,
+                                    el querer pasar el resto de mi vida contigo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">El primer ramo de Flores que te dí</figcaption>
+                </figure>
+
+                <!-- Marco 3 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/Avion Sevilla.jpg" alt="Avion Sevilla">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Nuestro Primer Viaje</h3>
+                                <p>
+                                    Este fue lowkey nuestro primer viaje kakkakakaka, si bien no viajamos juntos y no
+                                    estuvimos juntos, estuvimos en el mismo lugar, y sigue siendo de las mayores
+                                    coincidencias de mi vida.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Nuestro primer viaje (No juntos)</figcaption>
+                </figure>
+            </div>
+
+            <div class="navegacion">
+                <button class="btn-anterior" onclick="cambiarSala(1)">← Sala anterior</button>
+                <button class="btn-siguiente" onclick="cambiarSala(3)">Siguiente sala →</button>
+            </div>
+        </section>
+        <!-- Sala 3 - Nueva Sala -->
+        <section class="sala" data-sala="3">
+            <h1 class="titulo-sala">Momentos humildes</h1>
+
+            <div class="galeria">
+                <!-- Marco 1 -->
+                <!-- Marco con VIDEO -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <video controls loop playsinline>
+                                    <source src="videos/baile humilde.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Crazyyyy</h3>
+                                <p>Como no recordar que antes siempre estabamos buscando algun tik tok que hacer juntos
+                                    xdd, video sacado de las catacumbas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Sacaron los permitidos</figcaption>
+                </figure>
+
+                <!-- Marco 2 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <video controls loop playsinline>
+                                    <source src="videos/metrobooming.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Metro Boomin want some more</h3>
+                                <p>
+                                    Obra audiovisual del mes 4 A.T (Antes de la tragedia). Ya no somos tan asi, ahora a
+                                    veces yo también soy mechita 😞, but is funny funny.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">El Ying y el Bang</figcaption>
+                </figure>
+
+                <!-- Marco 3 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <video controls loop playsinline>
+                                    <source src="videos/jumping.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Los loquitos del parque</h3>
+                                <p>Es innegable que estas dos personas comparten el mismo neuronio, son tal para
+                                    cual.</br>
+                                    Se aman mucho jeje
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Los loquitos del parque</figcaption>
+                </figure>
+            </div>
+
+            <div class="navegacion">
+                <button class="btn-anterior" onclick="cambiarSala(2)">← Sala anterior</button>
+                <button class="btn-siguiente" onclick="cambiarSala(4)">Siguiente sala →</button>
+            </div>
+        </section>
+        <!-- Sala 4 - Nueva Sala -->
+        <!-- Sala 4 - Nueva Sala -->
+        <section class="sala" data-sala="4">
+            <h1 class="titulo-sala">El nuevo testamento </br>(Nuevo testamento)</h1>
+
+            <div class="galeria">
+                <!-- Marco 1 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/WE BACK 2.jpeg" alt="Foto 1 Sala 4">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Los Roneantes</h3>
+                                <p>Nuestra reconciliación, la primera vez que te recogí en Healthy Poke, una foto que
+                                    demuestra que después de mucho tiempo seguiamos compartiendo el mismo humor y
+                                    seguiamos disfrutando de la compañía uno del otro. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Los Roneantes </figcaption>
+                </figure>
+
+                <!-- Marco 2 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/WE BACK.jpeg" alt="Foto 2 Sala 4">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>ELEVATOR</h3>
+                                <p>Esta tonta imagen representa lo mucho que nos hemos esforzado siempre para poder
+                                    vernos, un día cualquiera en una mañana, donde yo trabajaba en la tarde y tu
+                                    estudiabas pero queríamos vernos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">ELEVATOR</figcaption>
+                </figure>
+
+                <!-- Marco 3 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <video controls loop playsinline>
+                                    <source src="videos/MY EYES.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>My Eyes</h3>
+                                <p>Una de nuestras noches, donde nos la pasábamos hablando y escuchando musica en musky.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">My Eyes</figcaption>
+                </figure>
+            </div>
+
+            <div class="navegacion">
+                <button class="btn-anterior" onclick="cambiarSala(3)">← Sala anterior</button>
+                <button class="btn-siguiente" onclick="cambiarSala(5)">Siguiente sala →</button>
+            </div>
+        </section>
+        <!-- Sala 5 - Sala Romántica -->
+        <section class="sala sala-romantica" data-sala="5">
+            <h1 class="titulo-sala">The New Beginning</h1>
+
+            <div class="galeria">
+                <!-- Marco 1 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/anel 2.jpeg" alt="Momento romántico 1">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>The Surprise (No tan Surprise)</h3>
+                                <p>Como no recordar cuando te quejaste de que no te daba flores justo cuando
+                                    te estaba preparando una sorpresa con flores y un anillo.
+                                    Pero bueno, al final todo salió bien y fue un momento muy especial para los dos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">The Surprise (No tan Surprise)</figcaption>
+                </figure>
+
+                <!-- Marco 2 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/pedido de namoro.jpeg" alt="Momento romántico 2">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>She said Yes!!</h3>
+                                <p>Foto momentos después de pedirte salir conmigo, un día como hoy, un 18 de noviembre
+                                    dentro del coche, después de una de nuestras largas charlas, me armé de valor otra
+                                    vez para hacerlo una vez más, pedirte salir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">She said Yes!!</figcaption>
+                </figure>
+
+                <!-- Marco 3 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/anel.jpeg" alt="Momento romántico 3">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>The Ringo Star</h3>
+                                <p>
+                                    El anillo que venia con el ramo de flores, más que simbolizar nuestro compromiso,
+                                    simboliza como te veo, como siempre que veo una estrella es inevitable pensar en ti,
+                                    en lo brillante que eres, en como me guías hacia el mejor camino, en lo afortunado
+                                    que soy de tenerte
+                                    a mi lado.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">The Ringo Star</figcaption>
+                </figure>
+            </div>
+
+            <div class="navegacion">
+                <button class="btn-anterior" onclick="cambiarSala(4)">← Sala anterior</button>
+                <button class="btn-siguiente" onclick="cambiarSala(6)">Siguiente sala →</button>
+            </div>
+        </section>
+        <!-- Sala 6 - Nueva Sala Normal -->
+        <section class="sala" data-sala="6">
+            <h1 class="titulo-sala">Título Sala 6</h1>
+
+            <div class="galeria">
+                <!-- Marco 1 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/foto10.jpg" alt="Foto 1 Sala 6">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Título Marco 1</h3>
+                                <p>Descripción del primer marco de la sala 6.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Descripción corta 1</figcaption>
+                </figure>
+
+                <!-- Marco 2 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/foto11.jpg" alt="Foto 2 Sala 6">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Título Marco 2</h3>
+                                <p>Descripción del segundo marco de la sala 6.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Descripción corta 2</figcaption>
+                </figure>
+
+                <!-- Marco 3 -->
+                <figure class="marco" onclick="girarMarco(this)">
+                    <div class="marco-inner">
+                        <div class="marco-frente">
+                            <div class="interior">
+                                <img src="imagenes/foto12.jpg" alt="Foto 3 Sala 6">
+                            </div>
+                        </div>
+                        <div class="marco-detras">
+                            <div class="texto-explicativo">
+                                <h3>Título Marco 3</h3>
+                                <p>Descripción del tercer marco de la sala 6.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="placa">Descripción corta 3</figcaption>
+                </figure>
+            </div>
+
+            <div class="navegacion">
+                <button class="btn-anterior" onclick="cambiarSala(5)">← Sala anterior</button>
+                <button class="btn-siguiente" onclick="cambiarSala(7)">Siguiente sala →</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar" onclick="cerrarModal()">&times;</span>
+            <video controls id="videoModal"></video>
+            <p id="textoModal"></p>
+        </div>
     </div>
 
-    
+    <div id="corazones">
+        <span class="corazon" onclick="coleccionar(1)">♥</span>
+    </div>
+
+    <audio id="audioAmbiente" loop>
+        <source src="audio/Head Over Heels - Tears for Fears.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musica" onclick="toggleMusica()">♪</button>
+
+    <script src="script.js"></script>
 </body>
+
 </html>

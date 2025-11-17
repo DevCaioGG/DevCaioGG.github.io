@@ -1,0 +1,702 @@
+/* ----------  VARIABLES RÁPIDAS  ---------- */
+:root {
+  --granate: #7C0A02;
+  --dorado: #D4AF37;
+  --dorado-osc: #ab7c0f;
+  --crema: #EAE0D5;
+  --bisel: 16px;
+  --ancho: 300px;
+  --alto: 400px;
+}
+
+/* ----------  RESET BÁSICO  ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Crimson Text', serif;
+  background: var(--granate);
+  color: var(--crema);
+  overflow-x: hidden;
+}
+
+/* ----------  TERMINAL DE BIENVENIDA  ---------- */
+#terminal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.terminal-contenido {
+  max-width: 800px;
+  background: rgba(0, 0, 0, .6);
+  border: 2px solid var(--dorado);
+  border-radius: 8px;
+  padding: 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.terminal-linea {
+  opacity: 0;
+  animation: aparecerLinea .3s forwards;
+}
+
+@keyframes aparecerLinea {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ----------  TERMINAL ROMÁNTICA  ---------- */
+.terminal-romantica #terminal{
+  background: linear-gradient(135deg, #fde8e9 0%, #fcd5d8 50%, #fab6bd 100%);
+}
+
+.terminal-romantica .terminal-contenido{
+  background: rgba(255, 192, 203, 0.3);
+  border: 2px solid #e6738c;
+  backdrop-filter: blur(10px);
+}
+
+.terminal-romantica .terminal-linea{
+  color: #c9184a;
+}
+
+.terminal-romantica .cursor{
+  background: #e6738c;
+}
+
+.terminal-romantica .scroll-indicador p{
+  color: #e6738c;
+}
+
+.terminal-romantica .flecha-abajo{
+  color: #e6738c;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: var(--dorado);
+  animation: parpadeo 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes parpadeo {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.scroll-indicador {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fadeInBounce 1s forwards 4s, bounce 2s infinite 5s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.scroll-indicador p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--dorado);
+}
+
+.flecha-abajo {
+  font-size: 2rem;
+  color: var(--dorado);
+}
+
+@keyframes fadeInBounce {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* ----------  TÍTULO CINEMATOGRÁFICO  ---------- */
+.titulo-sala {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  letter-spacing: 12px;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, var(--dorado) 50%, var(--dorado-osc) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+  animation: aparicionCinematica 2s ease-out forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.titulo-sala::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+}
+
+.titulo-sala::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+}
+
+@keyframes aparicionCinematica {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+    filter: blur(10px) drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+    filter: blur(5px) drop-shadow(0 0 30px rgba(212, 175, 55, 0.8));
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px) drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+  }
+}
+
+/* ----------  CONTENEDOR SALA  ---------- */
+.sala {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+  padding: 4rem 0;
+}
+
+.sala.activa {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------  SALA ROMÁNTICA  ---------- */
+.sala-romantica{
+  background: linear-gradient(135deg, #fde8e9 0%, #fcd5d8 50%, #fab6bd 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Corazones flotantes */
+.sala-romantica::before{
+  content: '♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 2.5rem;
+  color: rgba(230, 115, 140, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  padding: 2rem;
+  animation: flotarCorazones 20s infinite linear;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Estrellas brillantes */
+.sala-romantica::after{
+  content: '✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  color: rgba(255, 192, 203, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding: 3rem;
+  animation: parpadeoEstrellas 3s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes flotarCorazones{
+  0%{
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.15;
+  }
+  50%{
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.3;
+  }
+  100%{
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.15;
+  }
+}
+
+@keyframes parpadeoEstrellas{
+  0%, 100%{
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50%{
+    opacity: 0.45;
+    transform: scale(1.15);
+  }
+}
+
+/* Asegurar que el contenido esté por encima */
+.sala-romantica .titulo-sala,
+.sala-romantica .galeria,
+.sala-romantica .navegacion{
+  position: relative;
+  z-index: 1;
+}
+
+/* Marcos con estilo romántico rosado */
+.sala-romantica .marco-frente,
+.sala-romantica .marco-detras{
+  background: linear-gradient(135deg, #ffc0cb 0%, #e6738c 50%, #c9184a 100%);
+}
+
+.sala-romantica .marco-frente::before,
+.sala-romantica .marco-detras::before{
+  background: #fff0f3;
+}
+
+.sala-romantica .marco-frente::after,
+.sala-romantica .marco-detras::after{
+  background: linear-gradient(135deg, #ffe5ec 0%, #ffb3c1 50%, #ff8fa3 100%);
+}
+
+.sala-romantica .marco{
+  box-shadow: 0 0 25px rgba(230, 115, 140, 0.4);
+}
+
+.sala-romantica .marco:hover{
+  box-shadow: 0 0 40px rgba(230, 115, 140, 0.6);
+  transform: scale(1.05);
+}
+
+/* Título con colores románticos */
+.sala-romantica .titulo-sala{
+  background: linear-gradient(180deg, #c9184a 0%, #e6738c 50%, #ff8fa3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 25px rgba(230, 115, 140, 0.6));
+  animation: aparicionCinematica 2s ease-out forwards, pulsoRomantico 3s infinite ease-in-out 2s;
+}
+
+.sala-romantica .titulo-sala::before,
+.sala-romantica .titulo-sala::after{
+  background: linear-gradient(90deg, transparent, #e6738c, transparent);
+}
+
+@keyframes pulsoRomantico{
+  0%, 100%{
+    filter: drop-shadow(0 0 25px rgba(230, 115, 140, 0.6));
+  }
+  50%{
+    filter: drop-shadow(0 0 40px rgba(230, 115, 140, 0.9));
+  }
+}
+
+/* Botones con estilo romántico */
+.sala-romantica .btn-anterior,
+.sala-romantica .btn-siguiente{
+  background: linear-gradient(135deg, #ff8fa3 0%, #e6738c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(230, 115, 140, 0.4);
+}
+
+.sala-romantica .btn-anterior:hover,
+.sala-romantica .btn-siguiente:hover{
+  background: linear-gradient(135deg, #ffb3c1 0%, #ff8fa3 100%);
+  box-shadow: 0 6px 20px rgba(230, 115, 140, 0.6);
+}
+
+/* Placas con colores rosados */
+.sala-romantica .placa{
+  background: linear-gradient(180deg, #ffc0cb 0%, #e6738c 50%, #c9184a 100%);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+/* ----------  GALERÍA  ---------- */
+.galeria {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+/* ----------  EFECTO FLIP PARA MARCOS  ---------- */
+.marco {
+  width: 300px;
+  height: 400px;
+  position: relative;
+  perspective: 1000px;
+  margin-bottom: 40px;
+}
+
+.marco-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.marco.girado .marco-inner {
+  transform: rotateY(180deg);
+}
+
+.marco-frente,
+.marco-detras {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  padding: 12px;
+  background: linear-gradient(135deg, #f7ef8a 0%, #D4AF37 50%, #ab7c0f 100%);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+
+.marco-frente::before,
+.marco-detras::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  background: #5a0000;
+  border-radius: 6px;
+}
+
+.marco-frente::after,
+.marco-detras::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  background: linear-gradient(135deg, #f7ef8a 0%, #D4AF37 50%, #ab7c0f 100%);
+  border-radius: 4px;
+}
+
+.marco-detras {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marco-detras::after {
+  background: var(--crema);
+}
+
+.interior {
+  position: relative;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  margin: 16px;
+  overflow: hidden;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.marco-frente img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.marco-frente:hover {
+  transform: scale(1.02);
+}
+
+/* ----------  VIDEOS EN MARCOS  ---------- */
+.marco-frente video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 4px;
+  transform: scale(1.1);
+}
+
+/* ----------  TEXTO EXPLICATIVO DETRÁS  ---------- */
+.texto-explicativo {
+  position: relative;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  margin: 16px;
+  padding: 1.5rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--granate);
+  overflow-y: auto;
+}
+
+.texto-explicativo h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--dorado-osc);
+}
+
+.texto-explicativo p {
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3a0000;
+}
+
+.texto-explicativo .btn-volver {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--dorado);
+  color: var(--granate);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  transition: background 0.3s ease;
+}
+
+.texto-explicativo .btn-volver:hover {
+  background: var(--dorado-osc);
+}
+
+/* ----------  CINTA DORADA  ---------- */
+.placa {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 20px;
+  background: linear-gradient(180deg, #f7ef8a 0%, #D4AF37 50%, #ab7c0f 100%);
+  color: #2b2000;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  font-style: italic;
+  white-space: nowrap;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
+  z-index: 2;
+}
+
+/* ----------  NAVEGACIÓN  ---------- */
+.navegacion {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.btn-anterior,
+.btn-siguiente {
+  background: var(--dorado);
+  color: var(--granate);
+  border: none;
+  padding: .7rem 1.4rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .35);
+  transition: background .25s ease, transform .25s ease;
+}
+
+.btn-anterior:hover,
+.btn-siguiente:hover {
+  background: #f7ef8a;
+  transform: translateY(-2px);
+}
+
+/* ----------  CORAZONES OCULTOS  ---------- */
+.corazon {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--dorado);
+  cursor: pointer;
+  opacity: 0;
+  animation: latido 2s infinite;
+  transition: opacity .4s ease;
+}
+
+.marco:hover~.corazon,
+.corazon:hover {
+  opacity: 1;
+}
+
+@keyframes latido {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+/* ----------  LUZ QUE SIGUE AL CURSOR  ---------- */
+#luz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200vmax;
+  height: 200vmax;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 220, .18) 0%, transparent 50%);
+  pointer-events: none;
+  transition: background-position .08s;
+  z-index: 9999;
+}
+
+/* ----------  MODAL  ---------- */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .75);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background: var(--granate);
+  border: 2px solid var(--dorado);
+  border-radius: 6px;
+  padding: 2rem;
+  max-width: 80vw;
+  max-height: 80vh;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+}
+
+.modal-contenido video,
+.modal-contenido img {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 4px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 2rem;
+  color: var(--dorado);
+  cursor: pointer;
+}
+
+/* ----------  UTILIDADES  ---------- */
+#musica {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--dorado);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.6rem;
+  color: var(--granate);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .4);
+  transition: transform .25s ease;
+  z-index: 10000;
+}
+
+#musica:hover {
+  transform: scale(1.1);
+}
+
+/* ----------  RESPONSIVE  ---------- */
+@media (max-width: 768px) {
+  .titulo-sala {
+    font-size: 2rem;
+    letter-spacing: 6px;
+  }
+
+  .terminal-contenido {
+    font-size: 0.9rem;
+    padding: 1.5rem;
+  }
+
+  .galeria {
+    gap: 2rem;
+  }
+
+  .texto-explicativo h3 {
+    font-size: 1.2rem;
+  }
+
+  .texto-explicativo p {
+    font-size: 0.9rem;
+  }
+}
