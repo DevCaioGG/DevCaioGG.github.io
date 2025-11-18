@@ -28,13 +28,13 @@ const terminalesPorSala = {
     "> Última parte del antigüo sistema cargándose...",
     "> Siempre hemos sido muy ACDC xd...",
     "",
-    "[⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡]",
+    "[✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶]",
     "",
     ">  Cargando tik toks",
     "",
     ">  Bailes, trends y saltitos de rana.",
     "",
-    "[⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡]",
+    "[✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶]",
     "", 
     "> Sala lista."
   ],
@@ -42,14 +42,14 @@ const terminalesPorSala = {
     "> Recuperando sistema amoroso perdido...",
     "> Sistema reconstruido con éxito.",
     "",
-    "[✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦]",
+    "[✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶]",
     "",
     "  NUEVO TESTAMENTO CARGADO",
     "",
     "  Dejando atrás el pasado,",
     "  Seguimos escribiendo nuestra historia.",
     "",
-    "[✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦]",
+    "[✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶]",
     "",
     "> Sala lista."
   ],
@@ -88,11 +88,14 @@ const terminalesPorSala = {
 };
 
 let lineaActual = 0;
-let textoTerminalActual = textoTerminalInicial;
+let textoTerminalActual = terminalesPorSala[2]; // INICIALIZAR CON LA SALA 2
+let intervaloActivo = null; // Para controlar intervalos
 
 function escribirLinea(texto, delay = 0) {
   setTimeout(() => {
     const contenedor = document.getElementById('texto-terminal');
+    if (!contenedor) return; // Verificar que existe
+    
     const linea = document.createElement('div');
     linea.className = 'terminal-linea';
     linea.style.animationDelay = '0s';
@@ -101,23 +104,43 @@ function escribirLinea(texto, delay = 0) {
     linea.textContent = '';
     contenedor.appendChild(linea);
     
-    const intervalo = setInterval(() => {
+    // Si la línea está vacía, pasar a la siguiente inmediatamente
+    if (texto.length === 0) {
+      lineaActual++;
+      if (lineaActual < textoTerminalActual.length) {
+        escribirLinea(textoTerminalActual[lineaActual], 100);
+      } else {
+        // Mostrar cursor final solo al terminar todo
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        linea.appendChild(cursor);
+      }
+      return;
+    }
+    
+    // Limpiar intervalo anterior si existe
+    if (intervaloActivo) {
+      clearInterval(intervaloActivo);
+    }
+    
+    intervaloActivo = setInterval(() => {
       if (caracterActual < texto.length) {
         linea.textContent += texto[caracterActual];
         caracterActual++;
       } else {
-        clearInterval(intervalo);
+        clearInterval(intervaloActivo);
+        intervaloActivo = null;
         lineaActual++;
         if (lineaActual < textoTerminalActual.length) {
-          escribirLinea(textoTerminalActual[lineaActual], 50);
+          escribirLinea(textoTerminalActual[lineaActual], 100);
         } else {
-          // Mostrar cursor final
+          // Mostrar cursor final solo cuando terminan TODAS las líneas
           const cursor = document.createElement('span');
           cursor.className = 'cursor';
           linea.appendChild(cursor);
         }
       }
-    }, texto.length > 0 ? 30 : 0);
+    }, 30);
   }, delay);
 }
 
@@ -166,6 +189,12 @@ function mostrarTerminalSala(numeroSala){
   const body = document.body;
   const botonMusica = document.getElementById('musica');
   
+  // Limpiar intervalo activo si existe
+  if (intervaloActivo) {
+    clearInterval(intervaloActivo);
+    intervaloActivo = null;
+  }
+  
   // Limpiar contenido anterior
   contenedor.innerHTML = '';
   
@@ -191,16 +220,14 @@ function mostrarTerminalSala(numeroSala){
   scrollIndicador.style.animation = 'fadeInBounce 1s forwards 3s, bounce 2s infinite 4s';
   terminal.scrollIntoView({ behavior: 'smooth' });
   
-  // Cargar texto de la sala
-  textoTerminalActual = terminalesPorSala[numeroSala] || textoTerminalInicial;
+  // Cargar texto de la sala - USAR terminalesPorSala[2] si no existe
+  textoTerminalActual = terminalesPorSala[numeroSala] || terminalesPorSala[2];
   lineaActual = 0;
   
   // Escribir terminal
   setTimeout(() => {
     escribirLinea(textoTerminalActual[0], 300);
   }, 500);
-  
-  // NO ocultar automáticamente, esperar a que el usuario haga scroll
 }
 
 // ----------  FUNCIONES DEL MUSEO CON CAMBIO DE MÚSICA Y TERMINAL  ----------
@@ -215,14 +242,14 @@ function cambiarSala(n){
   const audio = document.getElementById('audioAmbiente');
   const source = audio.querySelector('source');
   
-// Mapeo de canciones por sala
-const musicaPorSala = {
-  2: 'audio/Head Over Heels - Tears for Fears.mp3',
-  3: 'audio/cancion-sala-3.mp3',
-  4: 'audio/cancion-sala-4.mp3',
-  5: 'audio/cancion-romantica.mp3',
-  6: 'audio/cancion-sala-6.mp3',  
-};
+  // Mapeo de canciones por sala
+  const musicaPorSala = {
+    2: 'audio/Head Over Heels - Tears for Fears.mp3',
+    3: 'audio/cancion-sala-3.mp3',
+    4: 'audio/cancion-sala-4.mp3',
+    5: 'audio/cancion-romantica.mp3',
+    6: 'audio/cancion-sala-6.mp3',  
+  };
   
   // Cambiar la fuente de audio si existe una canción para esta sala
   if(musicaPorSala[n]){
