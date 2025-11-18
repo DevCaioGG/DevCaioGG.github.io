@@ -235,52 +235,911 @@ body {
     transform: translateY(0);
   }
 }
+/* ----------  COLORES 420  ---------- */
+:root {
+  --verde-hierba: #4CAF50;
+  --verde-lima: #8BC34A;
+  --verde-oscuro: #1B5E20;
+  --purpura-haze: #9C27B0;
+  --naranja-fuego: #FF6B35;
+  --humo-gris: rgba(200, 200, 200, 0.3);
+}
+
+/* ----------  SALA 420  ---------- */
+.sala-420 {
+  background: linear-gradient(180deg, #0a2e0a 0%, #1a1a2e 50%, #16213e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Humo flotante de fondo */
+.sala-420::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(156, 39, 176, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(76, 175, 80, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 195, 74, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 80%, rgba(156, 39, 176, 0.12) 0%, transparent 55%);
+  animation: humoFlotante 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+@keyframes humoFlotante {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-50px) scale(1.05);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(-20px) scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+/* Hojas de cannabis flotantes */
+.sala-420::after {
+  content: '🌿 🍃 🌿 🍃 🌿 🍃 🌿 🍃 🌿 🍃 🌿 🍃 🌿 🍃 🌿 🍃';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+  color: rgba(76, 175, 80, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  padding: 3rem;
+  animation: hojasFlotando 25s infinite linear;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes hojasFlotando {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-40px) rotate(180deg);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.15;
+  }
+}
+
+/* Contenido por encima del fondo */
+.sala-420 .titulo-sala,
+.sala-420 .galeria,
+.sala-420 .navegacion {
+  position: relative;
+  z-index: 1;
+}
+
+/* Título con efecto de humo verde/morado */
+.sala-420 .titulo-sala {
+  background: linear-gradient(180deg, #8BC34A 0%, #4CAF50 30%, #9C27B0 70%, #7B1FA2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 40px rgba(156, 39, 176, 0.4));
+  animation: aparicionCinematica 2s ease-out forwards, pulsoHumo 4s infinite ease-in-out 2s;
+}
+
+.sala-420 .titulo-sala::before,
+.sala-420 .titulo-sala::after {
+  background: linear-gradient(90deg, transparent, var(--verde-hierba), var(--purpura-haze), transparent);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+
+@keyframes pulsoHumo {
+  0%, 100% {
+    filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.6)) drop-shadow(0 0 35px rgba(156, 39, 176, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 45px rgba(76, 175, 80, 0.9)) drop-shadow(0 0 55px rgba(156, 39, 176, 0.7));
+  }
+}
+
+/* Marcos con borde verde neón estilo 420 */
+.sala-420 .marco-frente,
+.sala-420 .marco-detras {
+  background: linear-gradient(135deg, #1a3a1a 0%, #16213e 50%, #2a1a4a 100%);
+  border: 3px solid var(--verde-hierba);
+  box-shadow: 
+    0 0 25px rgba(76, 175, 80, 0.5),
+    0 0 45px rgba(156, 39, 176, 0.3),
+    inset 0 0 30px rgba(76, 175, 80, 0.1);
+  animation: resplanorChill 3s infinite ease-in-out;
+}
+
+.sala-420 .marco-frente::before,
+.sala-420 .marco-detras::before {
+  background: linear-gradient(135deg, #0d1f0d 0%, #0a0a1a 100%);
+  border: 2px solid var(--purpura-haze);
+  box-shadow: 0 0 15px rgba(156, 39, 176, 0.4);
+}
+
+.sala-420 .marco-frente::after,
+.sala-420 .marco-detras::after {
+  background: linear-gradient(135deg, #1a3a1a 0%, #16213e 50%, #2a1a4a 100%);
+  border: 1px solid var(--verde-lima);
+}
+
+@keyframes resplanorChill {
+  0%, 100% {
+    box-shadow: 
+      0 0 25px rgba(76, 175, 80, 0.5),
+      0 0 45px rgba(156, 39, 176, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(76, 175, 80, 0.7),
+      0 0 60px rgba(156, 39, 176, 0.5);
+  }
+}
+
+.sala-420 .marco {
+  box-shadow: 0 8px 30px rgba(76, 175, 80, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.sala-420 .marco:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 
+    0 12px 40px rgba(76, 175, 80, 0.6),
+    0 0 50px rgba(156, 39, 176, 0.5);
+}
+
+/* Placas con estilo 420 */
+.sala-420 .placa {
+  background: linear-gradient(180deg, #8BC34A 0%, #4CAF50 50%, #2E7D32 100%);
+  color: #0a2e0a;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.6);
+  border: 2px solid var(--purpura-haze);
+  animation: brilloChill 2s infinite ease-in-out;
+}
+
+@keyframes brilloChill {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.6);
+  }
+  50% {
+    box-shadow: 0 6px 25px rgba(76, 175, 80, 0.9), 0 0 30px rgba(156, 39, 176, 0.5);
+  }
+}
+
+/* Botones con temática verde/morado */
+.sala-420 .btn-anterior,
+.sala-420 .btn-siguiente {
+  background: linear-gradient(135deg, var(--verde-hierba) 0%, var(--purpura-haze) 100%);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  border: 2px solid var(--verde-lima);
+  transition: all 0.3s ease;
+}
+
+.sala-420 .btn-anterior:hover,
+.sala-420 .btn-siguiente:hover {
+  background: linear-gradient(135deg, var(--verde-lima) 0%, var(--naranja-fuego) 100%);
+  box-shadow: 0 8px 30px rgba(76, 175, 80, 0.7), 0 0 40px rgba(156, 39, 176, 0.5);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Texto explicativo 420 */
+.sala-420 .texto-explicativo {
+  background: rgba(26, 58, 26, 0.95);
+  border-radius: 4px;
+}
+
+.sala-420 .texto-explicativo h3 {
+  color: var(--verde-lima);
+  text-shadow: 0 0 15px rgba(139, 195, 74, 0.8);
+  font-size: 1.6rem;
+}
+
+.sala-420 .texto-explicativo p {
+  color: #d4f1d4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ----------  TERMINAL 420  ---------- */
+.terminal-420 #terminal {
+  background: linear-gradient(180deg, #0a2e0a 0%, #1a1a2e 50%, #16213e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Humo en la terminal */
+.terminal-420 #terminal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 30% 40%, rgba(76, 175, 80, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(156, 39, 176, 0.2) 0%, transparent 50%);
+  animation: humoTerminal 15s ease-in-out infinite;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(50px);
+}
+
+@keyframes humoTerminal {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-60px) scale(1.2);
+  }
+}
+
+/* Hojas de cannabis en terminal */
+.terminal-420 #terminal::after {
+  content: '🌿';
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10rem;
+  opacity: 0.08;
+  color: var(--verde-hierba);
+  text-shadow: 0 0 50px rgba(76, 175, 80, 0.4);
+  animation: hojaGrande 6s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes hojaGrande {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-5deg) scale(1);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translateX(-50%) rotate(5deg) scale(1.1);
+    opacity: 0.15;
+  }
+}
+
+.terminal-420 .terminal-contenido {
+  background: rgba(26, 58, 26, 0.9);
+  border: 2px solid var(--verde-hierba);
+  box-shadow: 
+    0 0 30px rgba(76, 175, 80, 0.6),
+    0 0 50px rgba(156, 39, 176, 0.3);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-420 .terminal-linea {
+  color: var(--verde-lima);
+  text-shadow: 0 0 10px rgba(139, 195, 74, 0.6);
+  animation: aparecerLinea .3s forwards, resplandorTexto420 4s infinite;
+}
+
+@keyframes resplandorTexto420 {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(139, 195, 74, 0.6);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(139, 195, 74, 0.9), 0 0 30px rgba(156, 39, 176, 0.5);
+  }
+}
+
+.terminal-420 .cursor {
+  background: var(--verde-hierba);
+  box-shadow: 0 0 15px rgba(76, 175, 80, 1);
+  animation: parpadeo 1s infinite, pulsoVerde420 2s infinite;
+}
+
+@keyframes pulsoVerde420 {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(76, 175, 80, 1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(76, 175, 80, 1), 0 0 35px rgba(156, 39, 176, 0.7);
+  }
+}
+
+.terminal-420 .scroll-indicador {
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-420 .scroll-indicador p {
+  color: var(--verde-lima);
+  text-shadow: 0 0 20px rgba(139, 195, 74, 0.8);
+  font-weight: bold;
+}
+
+.terminal-420 .flecha-abajo {
+  color: var(--verde-hierba);
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+  animation: bounce 2s infinite, pulso420Flecha 2.5s infinite;
+}
+
+@keyframes pulso420Flecha {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 35px rgba(76, 175, 80, 1), 0 0 45px rgba(156, 39, 176, 0.7);
+    transform: scale(1.15);
+  }
+}
+
+/* ----------  UTILIDADES  ---------- */
+#musica {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--dorado);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.6rem;
+  color: var(--granate);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .4);
+  transition: transform .25s ease;
+  z-index: 10000;
+}
+
+#musica:hover {
+  transform: scale(1.1);
+}
+/* ----------  SALA PARÍS  ---------- */
+.sala-paris {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cielo con estrellas nocturnas */
+.sala-paris::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 80%, white, transparent),
+    radial-gradient(2px 2px at 15% 90%, white, transparent);
+  background-size: 200% 200%;
+  animation: estrellasParpadeo 8s infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes estrellasParpadeo {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
+}
+
+/* Torre Eiffel silueta de fondo */
+.sala-paris::after {
+  content: '🗼';
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15rem;
+  opacity: 0.08;
+  color: #d4af37;
+  text-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+  animation: luzTorre 4s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes luzTorre {
+  0%, 100% {
+    text-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+    opacity: 0.08;
+  }
+  50% {
+    text-shadow: 0 0 80px rgba(212, 175, 55, 0.5);
+    opacity: 0.12;
+  }
+}
+
+/* Contenido por encima del fondo */
+.sala-paris .titulo-sala,
+.sala-paris .galeria,
+.sala-paris .navegacion {
+  position: relative;
+  z-index: 1;
+}
+
+/* Título con estilo parisino elegante */
+.sala-paris .titulo-sala {
+  background: linear-gradient(180deg, #ecf0f1 0%, #d4af37 30%, #c27ba0 70%, #e74c3c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 20px rgba(231, 76, 60, 0.3));
+  animation: aparicionCinematica 2s ease-out forwards, brilloParisino 5s infinite ease-in-out 2s;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 14px;
+}
+
+.sala-paris .titulo-sala::before,
+.sala-paris .titulo-sala::after {
+  background: linear-gradient(90deg, transparent, #d4af37, #e74c3c, transparent);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes brilloParisino {
+  0%, 100% {
+    filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 20px rgba(231, 76, 60, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 45px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 35px rgba(231, 76, 60, 0.5));
+  }
+}
+
+/* Marcos con estilo parisino - borde dorado elegante */
+.sala-paris .marco-frente,
+.sala-paris .marco-detras {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  border: 3px solid #d4af37;
+  box-shadow: 
+    0 0 20px rgba(212, 175, 55, 0.4),
+    0 0 40px rgba(231, 76, 60, 0.2),
+    inset 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.sala-paris .marco-frente::before,
+.sala-paris .marco-detras::before {
+  background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+  border: 2px solid #c27ba0;
+}
+
+.sala-paris .marco-frente::after,
+.sala-paris .marco-detras::after {
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  border: 1px solid #ecf0f1;
+}
+
+.sala-paris .marco {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sala-paris .marco:hover {
+  transform: scale(1.06) translateY(-5px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(212, 175, 55, 0.5),
+    0 0 30px rgba(231, 76, 60, 0.3);
+}
+
+/* Placas con estilo francés */
+.sala-paris .placa {
+  background: linear-gradient(180deg, #ecf0f1 0%, #d4af37 50%, #c27ba0 100%);
+  color: #2c3e50;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+  border: 2px solid #2c3e50;
+}
+
+/* Botones con bandera francesa */
+.sala-paris .btn-anterior,
+.sala-paris .btn-siguiente {
+  background: linear-gradient(90deg, #0055a4 0%, #ffffff 33%, #ffffff 66%, #ef4135 100%);
+  color: #2c3e50;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border: 2px solid #d4af37;
+  transition: all 0.3s ease;
+}
+
+.sala-paris .btn-anterior:hover,
+.sala-paris .btn-siguiente:hover {
+  background: linear-gradient(90deg, #0066cc 0%, #f0f0f0 33%, #f0f0f0 66%, #ff5544 100%);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Texto explicativo parisino */
+.sala-paris .texto-explicativo {
+  background: rgba(44, 62, 80, 0.95);
+  border-radius: 4px;
+}
+
+.sala-paris .texto-explicativo h3 {
+  color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  font-size: 1.6rem;
+}
+
+.sala-paris .texto-explicativo p {
+  color: #ecf0f1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ----------  TERMINAL PARÃS  ---------- */
+.terminal-paris #terminal {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estrellas nocturnas en la terminal */
+.terminal-paris #terminal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 80%, white, transparent),
+    radial-gradient(2px 2px at 15% 90%, white, transparent);
+  background-size: 200% 200%;
+  animation: estrellasParpadeo 8s infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Torre Eiffel silueta de fondo en terminal */
+.terminal-paris #terminal::after {
+  content: '🗼';
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12rem;
+  opacity: 0.06;
+  color: #d4af37;
+  text-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+  animation: luzTorre 4s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.terminal-paris .terminal-contenido {
+  background: rgba(44, 62, 80, 0.95);
+  border: 2px solid #d4af37;
+  box-shadow: 
+    0 0 30px rgba(212, 175, 55, 0.5),
+    0 0 50px rgba(231, 76, 60, 0.2);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-paris .terminal-linea {
+  color: #ecf0f1;
+  text-shadow: 0 0 8px rgba(236, 240, 241, 0.3);
+}
+
+.terminal-paris .cursor {
+  background: #d4af37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+  animation: parpadeo 1s infinite, brilloParisinoTerminal 3s infinite;
+}
+
+@keyframes brilloParisinoTerminal {
+  0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.8); }
+  50% { box-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 30px rgba(231, 76, 60, 0.5); }
+}
+
+.terminal-paris .scroll-indicador {
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-paris .scroll-indicador p {
+  color: #d4af37;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  font-weight: bold;
+}
+
+.terminal-paris .flecha-abajo {
+  color: #e74c3c;
+  text-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+  animation: bounce 2s infinite, pulsoParisFlecha 2s infinite;
+}
+
+@keyframes pulsoParisFlecha {
+  0%, 100% { 
+    text-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 0 0 25px rgba(231, 76, 60, 0.9), 0 0 35px rgba(212, 175, 55, 0.5);
+    transform: scale(1.1);
+  }
+}
+
+/* ----------  COLORES NEÓN  ---------- */
+:root {
+  --neon-cyan: #00ffff;
+  --neon-magenta: #ff00ff;
+  --neon-verde: #00ff00;
+  --neon-azul: #0080ff;
+}
 
 /* ----------  SALA RAVE TECHNO  ---------- */
 .sala-rave {
   background: #000000;
   position: relative;
   overflow: hidden;
-  animation: estroboFondo 0.1s infinite;
+  animation: estroboFondo 0.15s infinite;
 }
 
 @keyframes estroboFondo {
-  0%, 95% { background: #000000; }
-  96%, 100% { background: #0a0a0a; }
+  0%, 90% { background: #000000; }
+  91%, 93% { background: #0a0a0a; }
+  94%, 96% { background: #050505; }
+  97%, 100% { background: #000000; }
 }
 
-/* Luces laser horizontales */
+/* Luces laser que cruzan la pantalla */
 .sala-rave::before {
   content: '';
   position: absolute;
-  top: 20%;
+  top: 0;
   left: -100%;
-  width: 200%;
-  height: 8px;
-  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-  animation: laserHorizontal 3s linear infinite, laserParpadeo 0.08s infinite;
+  width: 300%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, transparent 0%, var(--neon-cyan) 49%, transparent 49.5%, transparent 50%, var(--neon-magenta) 51%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, var(--neon-verde) 49%, transparent 49.5%, transparent 50%, var(--neon-azul) 51%, transparent 100%);
+  background-size: 200px 200px;
+  animation: laserMovimiento 3s linear infinite;
+  opacity: 0.3;
   pointer-events: none;
-  z-index: 1;
-  box-shadow: 0 0 20px var(--neon-cyan);
+  z-index: 0;
+  filter: blur(2px);
 }
 
-/* Marcos rave */
+@keyframes laserMovimiento {
+  0% { transform: translateX(0) translateY(0) rotate(45deg); }
+  100% { transform: translateX(50%) translateY(-50%) rotate(45deg); }
+}
+
+/* Rayos de luz estroboscópicos */
+.sala-rave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, var(--neon-cyan) 0%, transparent 15%),
+              radial-gradient(circle at 80% 60%, var(--neon-magenta) 0%, transparent 15%),
+              radial-gradient(circle at 50% 80%, var(--neon-verde) 0%, transparent 15%);
+  animation: lucesDiscoteca 0.5s infinite;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes lucesDiscoteca {
+  0%, 20% { opacity: 0.1; }
+  21%, 30% { opacity: 0.6; }
+  31%, 50% { opacity: 0.2; }
+  51%, 60% { opacity: 0.8; }
+  61%, 100% { opacity: 0.3; }
+}
+
+/* Contenido por encima de las luces */
+.sala-rave .titulo-sala,
+.sala-rave .galeria,
+.sala-rave .navegacion {
+  position: relative;
+  z-index: 1;
+}
+
+/* Título neón rave */
+.sala-rave .titulo-sala {
+  background: linear-gradient(180deg, var(--neon-cyan) 0%, var(--neon-verde) 50%, var(--neon-magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px var(--neon-cyan)) drop-shadow(0 0 40px var(--neon-magenta));
+  animation: aparicionCinematica 2s ease-out forwards, pulsoNeon 1s infinite ease-in-out 2s;
+  text-shadow: none;
+}
+
+.sala-rave .titulo-sala::before,
+.sala-rave .titulo-sala::after {
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), transparent);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+@keyframes pulsoNeon {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px var(--neon-cyan)) drop-shadow(0 0 30px var(--neon-magenta));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px var(--neon-cyan)) drop-shadow(0 0 60px var(--neon-magenta));
+  }
+}
+
+/* Marcos con borde neón */
 .sala-rave .marco-frente,
 .sala-rave .marco-detras {
   background: #000000;
   border: 3px solid var(--neon-verde);
-  box-shadow: 0 0 20px var(--neon-verde), inset 0 0 20px rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 20px var(--neon-verde), 
+              0 0 40px var(--neon-cyan),
+              inset 0 0 20px rgba(0, 255, 0, 0.1);
+  animation: stroboMarco 0.3s infinite;
+}
+
+.sala-rave .marco-frente::before,
+.sala-rave .marco-detras::before {
+  background: #0a0a0a;
+  border: 2px solid var(--neon-magenta);
+  box-shadow: 0 0 15px var(--neon-magenta);
+}
+
+.sala-rave .marco-frente::after,
+.sala-rave .marco-detras::after {
+  background: #000000;
+  border: 1px solid var(--neon-azul);
 }
 
 @keyframes stroboMarco {
-  0%, 49% { 
-    box-shadow: 0 0 30px var(--neon-verde), 0 0 50px rgba(0, 255, 0, 0.5);
+  0%, 80% { 
+    box-shadow: 0 0 30px var(--neon-verde), 0 0 50px var(--neon-cyan);
     filter: brightness(1.2);
   }
-  50%, 100% { 
-    box-shadow: 0 0 15px var(--neon-verde), 0 0 30px rgba(0, 255, 0, 0.2);
-    filter: brightness(0.9);
+  81%, 90% { 
+    box-shadow: 0 0 50px var(--neon-magenta), 0 0 70px var(--neon-verde);
+    filter: brightness(1.5);
   }
+  91%, 100% { 
+    box-shadow: 0 0 20px var(--neon-azul), 0 0 40px var(--neon-cyan);
+    filter: brightness(1);
+  }
+}
+
+.sala-rave .marco:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px var(--neon-cyan), 0 0 80px var(--neon-magenta);
+}
+
+/* Botones rave */
+.sala-rave .btn-anterior,
+.sala-rave .btn-siguiente {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-magenta) 100%);
+  color: #000000;
+  font-weight: bold;
+  box-shadow: 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-magenta);
+  animation: pulsoBoton 1s infinite;
+}
+
+.sala-rave .btn-anterior:hover,
+.sala-rave .btn-siguiente:hover {
+  background: linear-gradient(135deg, var(--neon-verde) 0%, var(--neon-cyan) 100%);
+  box-shadow: 0 0 40px var(--neon-verde), 0 0 60px var(--neon-cyan);
+  transform: translateY(-2px) scale(1.05);
+}
+
+@keyframes pulsoBoton {
+  0%, 100% { box-shadow: 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-magenta); }
+  50% { box-shadow: 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-magenta); }
+}
+
+/* Placas neón */
+.sala-rave .placa {
+  background: linear-gradient(180deg, var(--neon-cyan) 0%, var(--neon-verde) 50%, var(--neon-magenta) 100%);
+  color: #000000;
+  font-weight: bold;
+  box-shadow: 0 0 20px var(--neon-cyan);
+  text-shadow: none;
+  animation: parpadeoPlaca 0.5s infinite;
+}
+
+@keyframes parpadeoPlaca {
+  0%, 85% { opacity: 1; }
+  86%, 95% { opacity: 0.7; }
+  96%, 100% { opacity: 1; }
+}
+
+/* Texto explicativo rave */
+.sala-rave .texto-explicativo h3 {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-magenta);
+}
+
+.sala-rave .texto-explicativo p {
+  color: var(--neon-verde);
+  text-shadow: 0 0 5px var(--neon-verde);
+}
+
+/* ----------  TERMINAL RAVE  ---------- */
+.terminal-rave #terminal {
+  background: #000000;
+  animation: estroboTerminal 0.2s infinite;
+}
+
+@keyframes estroboTerminal {
+  0%, 95% { background: #000000; }
+  96%, 100% { background: #0a0a0a; }
+}
+
+.terminal-rave .terminal-contenido {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px var(--neon-magenta);
+  backdrop-filter: blur(10px);
+}
+
+.terminal-rave .terminal-linea {
+  color: var(--neon-verde);
+  text-shadow: 0 0 10px var(--neon-verde);
+  animation: aparecerLinea .3s forwards, glitchTexto 3s infinite;
+}
+
+@keyframes glitchTexto {
+  0%, 90% { text-shadow: 0 0 10px var(--neon-verde); }
+  91%, 93% { text-shadow: 0 0 20px var(--neon-cyan), 2px 0 var(--neon-magenta); }
+  94%, 100% { text-shadow: 0 0 10px var(--neon-verde); }
+}
+
+.terminal-rave .cursor {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.terminal-rave .scroll-indicador p {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 20px var(--neon-magenta);
+}
+
+.terminal-rave .flecha-abajo {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  animation: bounce 2s infinite, pulsoNeonFlecha 1s infinite;
+}
+
+@keyframes pulsoNeonFlecha {
+  0%, 100% { text-shadow: 0 0 20px var(--neon-cyan); }
+  50% { text-shadow: 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-magenta); }
 }
 
 /* ----------  SALA ROMÁNTICA  ---------- */
